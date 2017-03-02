@@ -1,0 +1,37 @@
+Relationships
+
+Person-Person
+- inspired by
+- lived at the same time
+- friends
+- related
+- born in the same country
+- married
+- rivals
+
+Composer-Composer
+- taught by
+
+Composer-Music Piece
+- composed
+- wrote
+- inspired by
+
+Composer-Musician
+- wrote for (any piece)
+
+Music Piece-Music Piece
+- same musical instruments
+- same music (different instruments)
+- written at the same time
+- same style
+- played at the same concert
+
+Music Piece-Musician
+- played by
+- inspired
+- disliked by
+- influenced
+
+Musician-Musician
+- taught by
