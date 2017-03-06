@@ -1,9 +1,35 @@
 var express = require('express');
 var router = express.Router();
+const Graph = require('graphology');
+const hits = require('graphology-hits');
+
+
+const randomGraph = generateDummyGraph(10000);
+
+const {hubs, authorities} = hits(randomGraph);
+
+console.log("I'm done xD");
+
+
+
+function generateDummyGraph(numberOfNodes) {
+    const graph = new Graph();
+    // nodes
+    for(var i = 0; i < numberOfNodes; i++) {
+        graph.addNode(i);
+    }
+    // edges
+    for(var i = 0; i < numberOfNodes / 4; i++) {
+        const random1 = Math.floor(Math.random() * numberOfNodes);
+        const random2 = Math.floor(Math.random() * numberOfNodes);
+        graph.addEdgeWithKey(random1 + '->' + random2, random1, random2);
+    }
+    return graph;
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.send('the music connection machine');
+    res.send(authorities);
 });
 
 module.exports = router;
