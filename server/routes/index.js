@@ -22,7 +22,12 @@ function generateDummyGraph(numberOfNodes) {
     for(var i = 0; i < numberOfNodes / 4; i++) {
         const random1 = Math.floor(Math.random() * numberOfNodes);
         const random2 = Math.floor(Math.random() * numberOfNodes);
-        graph.addEdgeWithKey(random1 + '->' + random2, random1, random2);
+
+        const key = random1 + '->' + random2;
+        // add only if not already found:
+        if(!(graph.edges(random1, random2).includes(key))) {
+            graph.addEdgeWithKey(key, random1, random2);
+        }
     }
     return graph;
 }
