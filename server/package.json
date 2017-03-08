@@ -14,6 +14,8 @@
     "pug": "~2.0.0-beta10",
     "serve-favicon": "~2.3.2",
     "graphology": "~0.7.0",
-    "graphology-hits": "~0.1.0"
+    "graphology-hits": "~0.1.0",
+    "request": "latest",
+    "fs": "latest"
   }
 }
