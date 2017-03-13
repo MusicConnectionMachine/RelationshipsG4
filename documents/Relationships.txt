@@ -2,7 +2,7 @@ Relationships
 
 Person-Person
 - inspired by
-- lived at the same time
+- lived at the same time period
 - friends
 - related
 - born in the same country
@@ -23,7 +23,7 @@ Composer-Musician
 Music Piece-Music Piece
 - same musical instruments
 - same music (different instruments)
-- written at the same time
+- written at the same time period
 - same style
 - played at the same concert
 
