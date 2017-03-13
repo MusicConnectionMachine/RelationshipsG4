@@ -9,4 +9,8 @@ In this repository we will try to build and determine relationships between comp
 ##Express Project
 1. navigate to server folder (in a new console)
 2. run `npm install` to install dependencies
-3. run `npm run start` to start server on localhost:3000
+3. run `npm run start` to start the server on localhost:3000, or alternatively run the ./bin/www file in WebStorm
+
+###Troubleshooting
+- Mac specific: in case you don't have [wget](https://www.gnu.org/software/wget) installed, you can get it via [homebrew](https://brew.sh) by running `brew install wget`
+- testing under Windows still in progress
