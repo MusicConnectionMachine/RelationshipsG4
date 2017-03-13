@@ -68,7 +68,7 @@ function generateGraph(urls) {
 }
 
 function getDomain(url) {
-    const result = url.match(/http(s)?:\/\/(www\.)?.*?.(?=(\/|\?|#|$))/);
+    const result = url.match(/http(s)?:\/\/.*?.(?=(\/|\?|#|$))/);
     return result ? result[0] : null;
 }
 
