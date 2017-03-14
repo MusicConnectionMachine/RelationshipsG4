@@ -16,6 +16,7 @@
     "graphology": "~0.7.0",
     "graphology-hits": "~0.1.0",
     "request": "latest",
-    "fs": "latest"
+    "fs": "latest",
+    "corenlp-client": "latest"
   }
 }
