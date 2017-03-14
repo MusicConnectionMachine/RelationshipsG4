@@ -1,7 +1,6 @@
 const request = require('request');
 const Graph = require('graphology');
 const hits = require('graphology-hits');
-const fs = require('fs');
 
 const dummyURLs = [
     'https://en.wikipedia.org/wiki/Johann_Sebastian_Bach',
@@ -13,17 +12,8 @@ const dummyURLs = [
 
 generateGraph(dummyURLs).then(function (graph) {
     scores = hits(graph).authorities;
-
     const output = JSON.stringify(scores, undefined, 4);
-
-    // save
-    fs.writeFile('source_reputability/scores.json', output, function (error) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('scores saved!');
-        }
-    });
+    console.log(output);
 }).catch(function (error) {
     console.log(error);
 });
