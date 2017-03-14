@@ -1,10 +1,8 @@
-/**
- * Created by Daniel on 14.03.2017.
- */
 const rq=require('request-promise');
+const config = require('../config.json');
 
 class StanfordCoreNLPClient {
-    constructor(host="http://localhost:9000",annotators="tokenize,ssplit,pos", additionalProps = {}) {
+    constructor(host=config.core_nlp_server_url,annotators="tokenize,ssplit,pos", additionalProps = {}) {
         this.host=host;
         this.annotators=annotators;
         this.additionalProps = additionalProps;
