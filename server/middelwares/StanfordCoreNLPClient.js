@@ -16,7 +16,6 @@ class StanfordCoreNLPClient {
     }
 
     annotate(text) {
-        console.log(this.host+'/' + this.properties);
         return rq({
                 method:'POST',
                 uri: this.host+'/' + this.properties,
