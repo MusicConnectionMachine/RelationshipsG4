@@ -1,21 +1,34 @@
 var express = require('express');
 var router = express.Router();
-const corenlp=require('corenlp-js-interface');
+var fs = require('fs');
+const StanfordCoreNLPClient = require('../middelwares/StanfordCoreNLPClient');
 
-const testPhrase = 'Born in Bonn,Beethoven was taught by his father Johann van Beethoven and by composer and conductor Christian Gottlob Neefe';
+const client = new StanfordCoreNLPClient(undefined, 'openie, coref', {"openie.resolve_coref": "true"});
 
-var result=corenlp(
-    testPhrase,
-    9000, /*port*/
-    'openie', /*annotators*/
-    'json' /*format*/
-);
+var data = "";
 
-result = JSON.parse(result);
+fs.readFile('../resources/testInput.txt',  "utf-8", function read(err, data) {
+    if (err) {
+        throw err;
+    }
+
+    // Invoke the next step here however you like
+    console.log(data);   // Put all of the code here (not the best solution)
+    processFile(data);          // Or put the next step in a function and invoke it
+});
+
+function processFile(testPhrase){
+    client.annotate(testPhrase)
+        .then(function(result){
+            data = result;
+        });
+}
+
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.send(result);
+    res.send(data);
 });
 
 
