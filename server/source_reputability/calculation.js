@@ -1,6 +1,8 @@
 const request = require('request');
+var express = require('express');
 const Graph = require('graphology');
 const hits = require('graphology-hits');
+var router = express.Router();
 
 const dummyURLs = [
     'https://en.wikipedia.org/wiki/Johann_Sebastian_Bach',
@@ -10,6 +12,7 @@ const dummyURLs = [
     'https://en.wikipedia.org/wiki/Vienna'
 ];
 
+/*
 generateGraph(dummyURLs).then(function (graph) {
     scores = hits(graph).authorities;
     const output = JSON.stringify(scores, undefined, 4);
@@ -17,7 +20,26 @@ generateGraph(dummyURLs).then(function (graph) {
 }).catch(function (error) {
     console.log(error);
 });
+*/
+router.get('/', function (req, res, next) {
+     var dummyURLs = [
+        'https://en.wikipedia.org/wiki/Johann_Sebastian_Bach',
+        'https://en.wikipedia.org/wiki/Wolfgang_Amadeus_Mozart',
+        'https://en.wikipedia.org/wiki/Joseph_Haydn',
+        'https://en.wikipedia.org/wiki/Ludwig_van_Beethoven',
+        'https://en.wikipedia.org/wiki/Vienna'
+    ];
 
+    generateGraph(dummyURLs).then(function (graph) {
+        var scores = hits(graph).authorities;
+        var output = JSON.stringify(scores, undefined, 4);
+        //console.log(output);
+        output = JSON.parse(output);
+        res.send(output);
+    }).catch(function (error) {
+        console.log(error);
+    });
+});
 
 function generateGraph(urls) {
     const graph = new Graph();
@@ -84,3 +106,5 @@ function getLinks(html, domain) {
         return /http.*/.test(link) ? link : domain + link;
     });
 }
+
+module.exports = router;
