@@ -4,23 +4,6 @@ const Graph = require('graphology');
 const hits = require('graphology-hits');
 var router = express.Router();
 
-const dummyURLs = [
-    'https://en.wikipedia.org/wiki/Johann_Sebastian_Bach',
-    'https://en.wikipedia.org/wiki/Wolfgang_Amadeus_Mozart',
-    'https://en.wikipedia.org/wiki/Joseph_Haydn',
-    'https://en.wikipedia.org/wiki/Ludwig_van_Beethoven',
-    'https://en.wikipedia.org/wiki/Vienna'
-];
-
-/*
-generateGraph(dummyURLs).then(function (graph) {
-    scores = hits(graph).authorities;
-    const output = JSON.stringify(scores, undefined, 4);
-    console.log(output);
-}).catch(function (error) {
-    console.log(error);
-});
-*/
 router.get('/', function (req, res, next) {
      var dummyURLs = [
         'https://en.wikipedia.org/wiki/Johann_Sebastian_Bach',
