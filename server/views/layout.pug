@@ -1,7 +1,18 @@
+//- This is the base of our views. All other views will extend this view in the "block" part(s)
 doctype html
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    //-
+        "block styles" means: if a view extends this one, they can define a block called "style" which will be rendered here
+        You can multiple blocks in your view, and when you extend them you can extend different parts of the original HTML
+    block styles
+      meta(charset="utf-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
+    .wrapper
+      //- Include means: take the view called navigation(.pug) and include its HTML content here
+      include navigation
+        //- Here we see another block section, this time called "content"
     block content
