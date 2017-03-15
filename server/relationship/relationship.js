@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+var path = require('path');
 const StanfordCoreNLPClient = require('../middelwares/StanfordCoreNLPClient');
 
 const client = new StanfordCoreNLPClient(undefined, 'openie, coref', {"openie.resolve_coref": "true"});
 
 var data = "";
 
-fs.readFile('../resources/testInput.txt',  "utf-8", function read(err, data) {
+
+fs.readFile(path.join(__dirname, '../resources') + '/testInput.txt',  "utf-8", function read(err, data) {
     if (err) {
         throw err;
     }
