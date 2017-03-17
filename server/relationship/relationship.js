@@ -19,8 +19,8 @@ fs.readFile(path.join(__dirname, '../resources') + '/testInput.txt',  "utf-8", f
     processFile(data);          // Or put the next step in a function and invoke it
 });
 
-function processFile(testPhrase){
-    client.annotate(testPhrase)
+function processFile(phrase){
+    client.annotate(phrase)
         .then(function(result){
             data = result;
         });
