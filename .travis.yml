@@ -9,7 +9,7 @@ services:
   - docker
 
 install:
-  - docker-compose up
+  - docker-compose build
 
 before_install:
   - cd server
