@@ -25,7 +25,12 @@ if (useLocalJson) {
             console.log('error: reading file');
         }).then(function (data) {
             data = JSON.parse(data);
-            filter.filterOpenIE(data);
+
+            var openie = filter.filterOpenIE(data);
+            console.log(JSON.stringify(openie));
+
+            var dates = filter.filterDates(data);
+            console.log(JSON.stringify(dates));
         });
 } else {
     getFileContent('mozart.txt')
@@ -48,12 +53,13 @@ if (useLocalJson) {
             // TODO: save everything in DB
             // DB connection missing at the moment
 
-            var openie = filter.filterOpenIE(result);
-            console.log(JSON.stringify(openie));
             // TODO: filter data
-            //filter.filterOpenIE(result);
-            //filter.filterCorefs(result);
+            var openie = filter.filterOpenIE(data);
+            console.log(JSON.stringify(openie));
 
+            var dates = filter.filterDates(data);
+            console.log(JSON.stringify(dates));
+            
             // TODO: save filtered data in DB
             // DB connection missing at the moment
 
