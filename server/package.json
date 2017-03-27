@@ -16,6 +16,7 @@
     "request": "2.81.0",
     "request-promise": "4.1.1",
     "graphology": "0.7.0",
-    "graphology-hits": "0.1.0"
+    "graphology-hits": "0.1.0",
+    "json-query": "2.2.0"
   }
 }
