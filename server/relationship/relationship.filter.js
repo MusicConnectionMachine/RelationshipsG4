@@ -1,0 +1,63 @@
+var express = require('express');
+const jsonQuery = require('json-query');
+
+/**
+ * returns a json with all relations in the format:
+ * {'subject': <...>, 'relation': <...>, 'object': <...>}
+ * @param json
+ */
+exports.filterOpenIE = function(json) {
+    console.log("called filter openie");
+    var data = jsonQuery('sentences[**][*openie]', {
+        data: json
+    });
+
+    data = data.value;
+    data = data.map(function (x) {
+        return {"subject": x.subject, "relation": x.relation, "object": x.object};
+    });
+    return data;
+};
+
+exports.filterKBP = function(json, searchText) {
+    // TODO: filter here
+    console.log("called filter kbp");
+};
+
+exports.filterCorefs = function(json, searchText) {
+    console.log("called filter corefs");
+
+    // get corefs keys
+    var data = jsonQuery('corefs[**][*text = ' + searchText + ']', {
+        data: json
+    });
+    var corefsValuesLengths = Object.values(json.corefs).map(x => x.length);
+    var corefKeys = [];
+    data.key.forEach(function(objectIndex) {
+        var corefKeyIndex = 0;
+        while (objectIndex + 1 > corefsValuesLengths[corefKeyIndex]) {
+            objectIndex -= corefsValuesLengths[corefKeyIndex];
+            corefKeyIndex++;
+        }
+        var corefKey = Object.keys(json.corefs)[corefKeyIndex];
+        if (corefKeys.indexOf(corefKey) == -1) {
+            corefKeys.push(corefKey);
+        }
+    });
+
+    // get corefs
+    var corefs = corefKeys.map(key => json.corefs[key]);
+
+    // flatten array
+    corefs = [].concat.apply([], corefs);
+
+    corefs.forEach(function(coref) {
+        //console.log(json.sentences[coref.sentNum - 1]);
+
+    });
+
+    // TODO: handle every sentence where the same person is mentioned.
+    console.log(corefs);
+
+    return corefs;
+};

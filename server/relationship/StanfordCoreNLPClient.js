@@ -6,7 +6,7 @@ class StanfordCoreNLPClient {
         this.host = host;
         this.properties =
             '?properties={' +
-            JSON.stringify(additionalProps).slice(1, -1) + ', ' +
+            additionalProps ? JSON.stringify(additionalProps).slice(1, -1) : '' + ', ' +
             '"annotators": "' + annotators + '", ' +
             '"outputFormat": "json"}';
     }
