@@ -13,3 +13,6 @@ install:
 
 before_install:
   - cd server
+  
+deploy:
+  provider: azure_web_apps
