@@ -26,6 +26,6 @@ install:
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "travis-docker-test" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push jstechrelationshipsg4/relationshipsg4;
     fi
