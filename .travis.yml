@@ -12,9 +12,6 @@ git:
 services:
   - docker
 
-install:
-  - docker-compose build
-
 before_install:
   # Use sed to replace the SSH URL with the public URL, then initialize submodules
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
@@ -26,6 +23,6 @@ install:
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "travis-docker-test" ]; then
-    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push jstechrelationshipsg4/relationshipsg4;
     fi
