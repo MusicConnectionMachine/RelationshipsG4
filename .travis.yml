@@ -13,6 +13,12 @@ install:
 
 before_install:
   - cd server
-  
-deploy:
-  provider: azure_web_apps
+
+install:
+  - docker build -t musicconnectionmachine/relationshipsfour .
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "travis-docker-test" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" ;
+    docker push musicconnectionmachine/relationshipsfour ;
+    fi
