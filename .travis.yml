@@ -15,10 +15,10 @@ before_install:
   - cd server
 
 install:
-  - docker build -t musicconnectionmachine/relationshipsfour .
+  - docker build -t jstechrelationshipsg4/relationshipsg4 .
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "travis-docker-test" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" ;
-    docker push musicconnectionmachine/relationshipsfour ;
+    docker push jstechrelationshipsg4/relationshipsg4 ;
     fi
