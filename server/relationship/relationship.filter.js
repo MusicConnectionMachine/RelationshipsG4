@@ -8,11 +8,14 @@ const jsonQuery = require('json-query');
  */
 exports.filterOpenIE = function(json) {
     console.log("called filter openie");
+    checkJSON(json);
     var data = jsonQuery('sentences[*openie]', {
         data: json
     });
 
+    console.log(data);
     data = data.value;
+    console.log(data);
 
     // TODO: Maybe calculate the position in the whole text
     // maps only relevant parts
@@ -24,6 +27,7 @@ exports.filterOpenIE = function(json) {
 
 exports.filterDates = function(json) {
     console.log("called filter dates");
+    checkJSON(json);
     var data = jsonQuery('sentences[*entitymentions][*ner=DATE]', {
         data: json,
     });
@@ -36,10 +40,12 @@ exports.filterDates = function(json) {
 exports.filterKBP = function(json, searchText) {
     // TODO: filter here
     console.log("called filter kbp");
+    checkJSON(json);
 };
 
 exports.filterCorefs = function(json, searchText) {
     console.log("called filter corefs");
+    checkJSON(json);
 
     // get corefs keys
     var data = jsonQuery('corefs[**][*text = ' + searchText + ']', {
@@ -75,3 +81,9 @@ exports.filterCorefs = function(json, searchText) {
 
     return corefs;
 };
+
+function checkJSON(json) {
+    if (!json) {
+        throw 'JSON is not valid';
+    }
+}

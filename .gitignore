@@ -38,3 +38,6 @@ jspm_packages
 
 # Webstorms Settings
 .idea
+
+# output of our code
+server/output
