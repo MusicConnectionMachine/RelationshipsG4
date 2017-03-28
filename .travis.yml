@@ -20,7 +20,7 @@ install:
   - docker build -t jstechrelationshipsg4/relationships .
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "travis-docker-test" ]; then 
+  - if [ "$TRAVIS_BRANCH" == "develop" ]; then 
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"; 
     docker push jstechrelationshipsg4/relationships; 
     fi
