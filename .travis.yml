@@ -15,7 +15,7 @@ before_install:
   - cd server
 
 install:
-  - docker-compose build
+  - docker build -t jstechrelationshipsg4/relationshipsg4 .
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "travis-docker-test" ]; then
