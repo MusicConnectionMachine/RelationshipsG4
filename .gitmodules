@@ -1,3 +1,3 @@
 [submodule "api"]
 	path = api
-	url = https://github.com/MusicConnectionMachine/api.git
+	url = git@github.com:MusicConnectionMachine/api.git

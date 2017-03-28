@@ -1,18 +1,26 @@
 language: node_js
 
 node_js:
-  - "6"
+  - '6'
 
 sudo: required
+
+git:
+  submodules: false
 
 services:
   - docker
 
-install:
-  - docker-compose build
-
 before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
   - cd server
-  
-deploy:
-  provider: azure_web_apps
+
+install:
+  - docker build -t jstechrelationshipsg4/relationships .
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "develop" ]; then 
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"; 
+    docker push jstechrelationshipsg4/relationships; 
+    fi
