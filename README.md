@@ -7,18 +7,21 @@ In this repository we will try to build and determine [relationships](https://ra
 ## Setup
 
 ### [Docker](https://www.docker.com)
-1. navigate to server folder (in a new console)
-2. run `docker-compose up`
-3. go to http://localhost:3000/relationships or http://localhost:3000/reputability in order to see respective JSON file
+1. cd into server folder
+2. run `docker build -t relationships .`
+3. run `docker run -p 3000:3000  -d relationships`
+4. go to http://localhost:3000/relationships or http://localhost:3000/reputability in order to see respective JSON file
+
+This connects to Stanford CoreNLP running on the Azure Server.
 
 ### Manually
 
-#### 1. Stanford CoreNLP
+#### 1. Stanford CoreNLP locally
 1. [download the latest Version](http://stanfordnlp.github.io/CoreNLP/#download)
 2. run `java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer` in the extracted folder to start the magic on localhost:9000
 
 #### 2. Express Project
-1. navigate to server folder (in a new console)
+1. cd into server folder (in a new console)
 2. in config.json, change the `core_nlp_server_url` to `http://localhost:9000`
 3. run `npm install` to install dependencies
 4. run `npm run start` to start the server on localhost:3000, or alternatively run the ./bin/www file in WebStorm
