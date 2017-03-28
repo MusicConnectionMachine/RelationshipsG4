@@ -1,21 +1,26 @@
 language: node_js
+
 node_js:
-- '6'
+  - '6'
+
 sudo: required
+
 git:
   submodules: false
+
 services:
-- docker
+  - docker
+
 before_install:
-- sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-- git submodule update --init --recursive
-- cd server
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
+  - cd server
+
 install:
-- docker build -t jstechrelationshipsg4/relationships .
+  - docker build -t jstechrelationshipsg4/relationships .
+
 after_success:
-- if [ "$TRAVIS_BRANCH" == "travis-docker-test" ]; then docker login -u="$DOCKER_USERNAME"
-  -p="$DOCKER_PASSWORD"; docker push jstechrelationshipsg4/relationships; fi
-env:
-  global:
-  - secure: ccX+So9sGFDU1xaDCCX1NcCFZXusm01iWOf8YApS+q5Yov/wvM0mw4mwwc9+p6wPVxYyHpDzlBIZNutih+9rQzmSUCtGn0xJHgewaVLBS3+B7jU4Pld91ojU3WVx9i0oCw5BQvTUmYxvMIZgWwdH7TWggukSCzQIrEwff7GNiDFx2yYdWyiCf1BayuL/3WbacYS0+Xf52aaWHIaSUEu2KCIDXD7QwwCehcYRIBPtxNy2xl2n5GBGSE/1nQjbjKcGeleQMeVhI1q+CbdC7/esS6oJ0Nk67j2iosv9IF/6clK2TrG+ChncZJ6bj8pTzkA55rEOybD/fg9aEY2qwdDT98nezPb1u3YirBn8sWmB7yZFAqAsCfou4hGtsssdS7FkNSccMfKmNddVBSNZ7A1T61kKI78odb8lQJmi+eSXLzXIKEDNXC/ATTuYRvHKK8odOltt2JHEUBXotH8eCeUc4r9EWtwDb8uqxlVQoorWWQt4dxAvYwKnW+4PUYRuCcfqJe/aeNC4U7VIOyNBE+izEJXdikfH48x6h89IJQXz/wH2tGBQGNYOwh6MgI6Obga+pTMKpWDw9bQBjzeOxoTGOnwC/uL/B+M6+SssFCN0eWBDONwg7LyQ+1DrEkR9wzEPrKi3cF7Y8n7qikIlrKKZyTeoCoq2MLbWedQAYM5jQ30=
-  - secure: li5NJPEs8TZUe7GYnJ+Q3iQGQXOORsglEij1r6wQCoaWtoJH0Cel+6XBLQ5IleJmrsz27GIP8IUZBoKhvHNofctKB9KQC4+3VQTwEg7vumhDQsvx+IHrphE5JblkaJy3s1UEKd8+RTZ6+XHvnJSUMzvGgfzAplQ+rOfNrCAWkKkVsNPEJjCFqcGm9fSaf37hZ/l55suVb8nO+P6XV4Fq/1xiAr1PKZGuDEF211iu7dKM8t8ylJLqex3xqAXBenjdB23VVoE9+/G+MuMhnQ83bxq6/8aQcdAV6AciBJvR0pbJrGO+SCl37jwAfQfWrTNnrI+yY+hfr2Pbl7ox7KA2dD/oLbexqIIgHW2gm7h2rcqTDJj5WQplsE8oT/QVlZ+daxMlEIDIpJaZriYfQ4e5lQmMrdZnW/VDeL+1X9Zrsmuo2MJiJjuwAh93dfkAbJuOg5bG6NnPl7lcAaW+08Uz2RSt68QIILySSx8b7zN8uawZs4IhJQnbX+7shi7XxgAg9Ke6EplYhcPl3j0n25nUvXk+JSeo8PEI0O18nPDplcsUr1oG0X41WR+QbntWQYqzVCftPVHfkrIBSNnHp+ldp8C7HBahu1IMjPdVa0DtiXmkbfzDcl0Dfx176Mb//bPWixyxBZlGCvMKbsjRhNxQ4TtjWCDffNII8qyZJQtzo4E=
+  - if [ "$TRAVIS_BRANCH" == "travis-docker-test" ]; then 
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"; 
+    docker push jstechrelationshipsg4/relationships; 
+    fi
