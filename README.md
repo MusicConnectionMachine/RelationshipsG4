@@ -2,8 +2,6 @@
 
 In this repository we will try to build and determine [relationships](https://raw.githubusercontent.com/MusicConnectionMachine/RelationshipsG4/develop/documents/Relationships.txt) between composers
 
-![Architecture Overview](https://raw.githubusercontent.com/MusicConnectionMachine/RelationshipsG4/develop/documents/Architecture%20Overview.png)
-
 ## Setup
 
 ### [Docker](https://www.docker.com)
