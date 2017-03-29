@@ -4,15 +4,20 @@ In this repository we will try to build and determine [relationships](https://ra
 
 ## Setup
 
-### [Docker](https://www.docker.com)
+Choose one of the following possibilites:
+
+### Using [Docker Hub](https://hub.docker.com/r/musicconnectionmachine/relationshipsg4)
+1. run `docker pull musicconnectionmachine/relationshipsg4`
+2. run `docker run -p 3000:3000  -d musicconnectionmachine/relationshipsg4`
+3. go to http://localhost:3000/relationships or http://localhost:3000/reputability in order to see respective JSON file
+
+### Using just [Docker](https://www.docker.com)
 1. cd into server folder
-2. run `docker build -t relationships .`
-3. run `docker run -p 3000:3000  -d relationships`
+2. run `docker build -t musicconnectionmachine/relationshipsg4 .`
+3. run `docker run -p 3000:3000  -d musicconnectionmachine/relationshipsg4`
 4. go to http://localhost:3000/relationships or http://localhost:3000/reputability in order to see respective JSON file
 
-This connects to Stanford CoreNLP running on the Azure Server.
-
-### Manually
+### Completely manually
 
 #### 1. Stanford CoreNLP locally
 1. [download the latest Version](http://stanfordnlp.github.io/CoreNLP/#download)
