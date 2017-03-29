@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var path = require('path');
+const config = require('../config.json');
 const StanfordCoreNLPClient = require('../relationship/StanfordCoreNLPClient');
 
 const filter = require("../relationship/relationship.filter.js");
 
-const useLocalJson = false;
+const useLocalJson = true;
 
 const client = new StanfordCoreNLPClient(
     undefined,
@@ -22,15 +23,18 @@ var data = '';
 if (useLocalJson) {
     getFileContent('relationships-testData.json')
         .catch(function (error) {
+            console.error(error);
             console.log('error: reading file');
+            return;
         }).then(function (data) {
-            data = JSON.parse(data);
-            filter.filterOpenIE(data);
+            processNLPResult(JSON.parse(data))
         });
 } else {
     getFileContent('mozart.txt')
         .catch(function (error) {
+            console.error(error);
             console.log('error: reading file');
+            return;
         }).then(function (data) {
             console.log("got data from wet");
             // for wet
@@ -42,23 +46,39 @@ if (useLocalJson) {
         }).catch(function (error) {
             console.error(error);
             console.log('error: coreNLP processing');
+            return;
         }).then(function (result) {
-            console.log("got data from nlp");
-            console.log(JSON.stringify(result));
-            // TODO: save everything in DB
-            // DB connection missing at the moment
-
-            var openie = filter.filterOpenIE(result);
-            console.log(JSON.stringify(openie));
-            // TODO: filter data
-            //filter.filterOpenIE(result);
-            //filter.filterCorefs(result);
-
-            // TODO: save filtered data in DB
-            // DB connection missing at the moment
-
-            data = result;
+            processNLPResult(result);
         });
+}
+
+/**
+ * @param result json object returned by the NLP server.
+ */
+function processNLPResult(result) {
+    console.log("got data from nlp");
+
+    data = result;
+
+    // log the result
+    console.log(JSON.stringify(result));
+
+    // TODO: save everything in DB
+    // DB connection missing at the moment
+
+    // TODO: filter data
+    var openie = filter.filterOpenIE(result);
+    console.log(JSON.stringify(openie));
+
+    var dates = filter.filterDates(result);
+    console.log(JSON.stringify(dates));
+
+    // TODO: save filtered data in DB
+    // DB connection missing at the moment
+
+    // store output on FS
+    saveToFS("openIE", openie);
+    saveToFS("dates", dates);
 }
 
 function getFileContent(filename) {
@@ -85,6 +105,38 @@ function splitWet(data) {
     content = content.substring(0, 100);
 
     return content;
+}
+
+/**
+ * Store the given data as files on local storage, subfolder 'output'.
+ * @param filename the name of the file, without extension, will always be .json
+ * @param data the json object containing the data
+ */
+function saveToFS(filename, data) {
+    if (!config.save_to_fs) {
+        return;
+    }
+    var dir = path.join(__dirname, '../output');
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+    fs.writeFile(dir + '/' + filename + ".json", JSON.stringify(data), 'utf-8', function(err) {
+        if(err) {
+            return console.log(err);
+        }
+
+        console.log(filename + " was saved!");
+    });
+}
+
+/**
+ * TODO: implement save to db logic here, maybe just call the API from here.
+ */
+function saveToDB() {
+    if (!config.save_to_db) {
+        return;
+    }
+    // TODO: logic here
 }
 
 /* GET home page. */
